@@ -2,10 +2,10 @@ const random = require('./helpers/random');
 
 const value = random(20);
 const data = {
-	server: 'https://mobile.rocket.chat',
+	server: 'https://chat.ejadtech.io',
 	adminUser: 'e2e_admin',
 	adminPassword: 'p7mFh4yLwCRXSnMvG',
-	alternateServer: 'https://stable.rocket.chat',
+	alternateServer: 'https://chat.ejadtech.io',
 	users: {
 		regular: {
 			username: `userone${value}`,

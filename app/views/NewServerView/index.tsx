@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Keyboard, StyleSheet, View, BackHandler, Image } from 'react-native';
+import { Text, Keyboard, StyleSheet, View, BackHandler, Image, Dimensions, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { Base64 } from 'js-base64';
 import parse from 'url-parse';
@@ -15,8 +15,8 @@ import EventEmitter from '../../utils/events';
 import { selectServerRequest, serverRequest, serverFinishAdd as serverFinishAddAction } from '../../actions/server';
 import { inviteLinksClear as inviteLinksClearAction } from '../../actions/inviteLinks';
 import sharedStyles from '../Styles';
-import Button from '../../containers/Button';
-import OrSeparator from '../../containers/OrSeparator';
+// import Button from '../../containers/Button';
+// import OrSeparator from '../../containers/OrSeparator';
 import FormContainer, { FormContainerInner } from '../../containers/FormContainer';
 import I18n from '../../i18n';
 import { themes } from '../../constants/colors';
@@ -32,7 +32,7 @@ import RocketChat from '../../lib/rocketchat';
 import { isTablet } from '../../utils/deviceInfo';
 import { verticalScale, moderateScale } from '../../utils/scaling';
 import { withDimensions } from '../../dimensions';
-import ServerInput from './ServerInput';
+// import ServerInput from './ServerInput';
 import { OutsideParamList } from '../../stacks/types';
 
 const styles = StyleSheet.create({
@@ -40,15 +40,15 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		resizeMode: 'contain'
 	},
-	title: {
-		...sharedStyles.textBold,
-		letterSpacing: 0,
-		alignSelf: 'center'
-	},
-	subtitle: {
-		...sharedStyles.textRegular,
-		alignSelf: 'center'
-	},
+	// title: {
+	// 	...sharedStyles.textBold,
+	// 	letterSpacing: 0,
+	// 	alignSelf: 'center'
+	// },
+	// subtitle: {
+	// 	...sharedStyles.textRegular,
+	// 	alignSelf: 'center'
+	// },
 	certificatePicker: {
 		alignItems: 'center',
 		justifyContent: 'flex-end'
@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
 	chooseCertificate: {
 		...sharedStyles.textSemibold
 	},
-	description: {
-		...sharedStyles.textRegular,
-		textAlign: 'center'
-	},
-	connectButton: {
-		marginBottom: 0
-	}
+	// description: {
+	// 	...sharedStyles.textRegular,
+	// 	textAlign: 'center'
+	// },
+	// connectButton: {
+	// 	marginBottom: 0
+	// }
 });
 
 export interface IServer extends Model {
@@ -107,7 +107,7 @@ class NewServerView extends React.Component<INewServerView, IState> {
 		this.setHeader();
 
 		this.state = {
-			text: '',
+			text: 'chat.ejadtech.io',
 			connectingOpen: false,
 			certificate: null,
 			serversHistory: []
@@ -118,6 +118,7 @@ class NewServerView extends React.Component<INewServerView, IState> {
 
 	componentDidMount() {
 		this.queryServerHistory();
+		this.submit()
 	}
 
 	componentWillUnmount() {
@@ -333,8 +334,9 @@ class NewServerView extends React.Component<INewServerView, IState> {
 		const marginTop = previousServer ? 0 : 35;
 
 		return (
-			<FormContainer theme={theme} testID='new-server-view' keyboardShouldPersistTaps='never'>
+			<FormContainer  theme={theme} testID='new-server-view' keyboardShouldPersistTaps='never'>
 				<FormContainerInner>
+					<View style={{flex:1, justifyContent:"center",}}>
 					<Image
 						style={[
 							styles.onboardingImage,
@@ -348,38 +350,7 @@ class NewServerView extends React.Component<INewServerView, IState> {
 						source={require('../../static/images/logo.png')}
 						fadeDuration={0}
 					/>
-					<Text
-						style={[
-							styles.title,
-							{
-								color: themes[theme].titleText,
-								fontSize: moderateScale({ size: 22, width }),
-								marginBottom: verticalScale({ size: 8, height })
-							}
-						]}>
-						Rocket.Chat
-					</Text>
-					<Text
-						style={[
-							styles.subtitle,
-							{
-								color: themes[theme].controlText,
-								fontSize: moderateScale({ size: 16, width }),
-								marginBottom: verticalScale({ size: 30, height })
-							}
-						]}>
-						{I18n.t('Onboarding_subtitle')}
-					</Text>
-					<ServerInput
-						text={text}
-						theme={theme}
-						serversHistory={serversHistory}
-						onChangeText={this.onChangeText}
-						onSubmit={this.submit}
-						onDelete={this.deleteServerHistory}
-						onPressServerHistory={this.onPressServerHistory}
-					/>
-					<Button
+					{/* <Button
 						title={I18n.t('Connect')}
 						type='primary'
 						onPress={this.submit}
@@ -388,31 +359,11 @@ class NewServerView extends React.Component<INewServerView, IState> {
 						style={[styles.connectButton, { marginTop: verticalScale({ size: 16, height }) }]}
 						theme={theme}
 						testID='new-server-view-button'
-					/>
-					<OrSeparator theme={theme} />
-					<Text
-						style={[
-							styles.description,
-							{
-								color: themes[theme].auxiliaryText,
-								fontSize: moderateScale({ size: 14, width }),
-								marginBottom: verticalScale({ size: 16, height })
-							}
-						]}>
-						{I18n.t('Onboarding_join_open_description')}
-					</Text>
-					<Button
-						title={I18n.t('Join_our_open_workspace')}
-						type='secondary'
-						backgroundColor={themes[theme].chatComponentBackground}
-						onPress={this.connectOpen}
-						disabled={connecting}
-						loading={connectingOpen && connecting}
-						theme={theme}
-						testID='new-server-view-open'
-					/>
+					/> */}
+					{(!text || connecting)&&<ActivityIndicator/>}
+					</View>
 				</FormContainerInner>
-				{this.renderCertificatePicker()}
+				
 			</FormContainer>
 		);
 	}

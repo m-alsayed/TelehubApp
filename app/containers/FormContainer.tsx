@@ -6,7 +6,7 @@ import sharedStyles from '../views/Styles';
 import scrollPersistTaps from '../utils/scrollPersistTaps';
 import KeyboardView from '../presentation/KeyboardView';
 import StatusBar from './StatusBar';
-import AppVersion from './AppVersion';
+// s import AppVersion from './AppVersion';
 import { isTablet } from '../utils/deviceInfo';
 import SafeAreaView from './SafeAreaView';
 
@@ -39,7 +39,7 @@ const FormContainer = ({ children, theme, testID, ...props }: IFormContainer): J
 			{...props}>
 			<SafeAreaView testID={testID} style={{ backgroundColor: themes[theme].backgroundColor }}>
 				{children}
-				<AppVersion theme={theme} />
+				{/* <AppVersion theme={theme} /> */}
 			</SafeAreaView>
 		</ScrollView>
 	</KeyboardView>

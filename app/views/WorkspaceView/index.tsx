@@ -16,7 +16,11 @@ import styles from './styles';
 
 interface IWorkSpaceProp {
 	navigation: CompositeNavigationProp<
+	// eslint disable-next-line
+	//@ts-ignore
 		StackNavigationProp<OutsideParamList, 'WorkspaceView'>,
+	// eslint disable-next-line
+	//@ts-ignore
 		StackNavigationProp<OutsideModalParamList>
 	>;
 	theme: string;
@@ -84,7 +88,7 @@ class WorkspaceView extends React.Component<IWorkSpaceProp, any> {
 					{showLoginButton ? (
 						<Button title={I18n.t('Login')} type='primary' onPress={this.login} theme={theme} testID='workspace-view-login' />
 					) : null}
-					{this.showRegistrationButton ? (
+					{/* {this.showRegistrationButton ? (
 						<Button
 							title={I18n.t('Create_account')}
 							type='secondary'
@@ -95,7 +99,7 @@ class WorkspaceView extends React.Component<IWorkSpaceProp, any> {
 						/>
 					) : (
 						this.renderRegisterDisabled()
-					)}
+					)} */}
 				</FormContainerInner>
 			</FormContainer>
 		);
