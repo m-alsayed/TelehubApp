@@ -31,6 +31,7 @@ buildscript {
     }
 
     dependencies {
+       // implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }
         if (isPlay) {
             classpath 'com.google.gms:google-services:4.2.0'
             classpath 'com.google.firebase:firebase-crashlytics-gradle:2.0.0'
